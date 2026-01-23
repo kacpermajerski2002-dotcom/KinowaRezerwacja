@@ -16,6 +16,17 @@ namespace KinowaRezerwacja.Data
         public DbSet<Seat> Seats { get; set; }
         public DbSet<Reservation> Reservations { get; set; }
 
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+
+            // Mówimy EF, żeby nie kasował kaskadowo Reservations przy usuwaniu Seat
+            builder.Entity<Reservation>()
+                .HasOne(r => r.Seat)
+                .WithMany()
+                .HasForeignKey(r => r.SeatId)
+                .OnDelete(DeleteBehavior.Restrict);
+        }
 
     }
 }
