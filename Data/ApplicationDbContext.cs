@@ -15,6 +15,8 @@ namespace KinowaRezerwacja.Data
         public DbSet<Hall> Halls { get; set; }
         public DbSet<Seat> Seats { get; set; }
         public DbSet<Reservation> Reservations { get; set; }
+        public DbSet<Seance> Seances { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

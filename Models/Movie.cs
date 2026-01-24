@@ -15,7 +15,5 @@ namespace KinowaRezerwacja.Models
         [Range(1, 400)]
         public int Duration { get; set; }
 
-        public int HallId { get; set; }
-        public required Hall Hall { get; set; }
     }
 }
