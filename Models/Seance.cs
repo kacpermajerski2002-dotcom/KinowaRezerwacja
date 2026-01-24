@@ -11,9 +11,9 @@ namespace KinowaRezerwacja.Models
         public DateTime StartTime { get; set; }
 
         public int MovieId { get; set; }
-        public Movie Movie { get; set; } = null!;
+        public Movie? Movie { get; set; } = null!;
 
         public int HallId { get; set; }
-        public Hall Hall { get; set; } = null!;
+        public Hall? Hall { get; set; } = null!;
     }
 }
