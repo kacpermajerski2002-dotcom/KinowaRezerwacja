@@ -10,6 +10,6 @@ namespace KinowaRezerwacja.Models
         public int Number { get; set; }
 
         public int HallId { get; set; }
-        public required Hall Hall { get; set; }
+        public Hall Hall { get; set; }
     }
 }

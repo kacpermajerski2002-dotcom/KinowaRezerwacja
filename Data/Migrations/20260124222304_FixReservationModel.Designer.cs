@@ -4,6 +4,7 @@ using KinowaRezerwacja.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace KinowaRezerwacja.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260124222304_FixReservationModel")]
+    partial class FixReservationModel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -367,7 +370,7 @@ namespace KinowaRezerwacja.Data.Migrations
             modelBuilder.Entity("KinowaRezerwacja.Models.Reservation", b =>
                 {
                     b.HasOne("KinowaRezerwacja.Models.Seance", "Seance")
-                        .WithMany("Reservations")
+                        .WithMany()
                         .HasForeignKey("SeanceId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -469,11 +472,6 @@ namespace KinowaRezerwacja.Data.Migrations
                     b.Navigation("Movies");
 
                     b.Navigation("Seats");
-                });
-
-            modelBuilder.Entity("KinowaRezerwacja.Models.Seance", b =>
-                {
-                    b.Navigation("Reservations");
                 });
 #pragma warning restore 612, 618
         }

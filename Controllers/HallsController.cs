@@ -60,11 +60,35 @@ namespace KinowaRezerwacja.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(hall);
+                _context.Halls.Add(hall);
                 await _context.SaveChangesAsync();
+
+                // GENEROWANIE MIEJSC
+                var seats = new List<Seat>();
+
+                for (int row = 1; row <= hall.Rows; row++)
+                {
+                    for (int number = 1; number <= hall.SeatsPerRow; number++)
+                    {
+                        seats.Add(new Seat
+                        {
+                            Row = row,
+                            Number = number,
+                            HallId = hall.Id
+                        });
+                    }
+                }
+
+                _context.Seats.AddRange(seats);
+                await _context.SaveChangesAsync();
+
                 return RedirectToAction(nameof(Index));
+
             }
+
             return View(hall);
+
+
         }
 
         // GET: Halls/Edit/5
@@ -150,6 +174,41 @@ namespace KinowaRezerwacja.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
+
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> GenerateSeats(int id)
+        {
+            var hall = await _context.Halls
+                .Include(h => h.Seats)
+                .FirstOrDefaultAsync(h => h.Id == id);
+
+            if (hall == null)
+                return NotFound();
+
+            if (hall.Seats.Any())
+                return Content("Sala już ma wygenerowane miejsca");
+
+            var seats = new List<Seat>();
+
+            for (int row = 1; row <= hall.Rows; row++)
+            {
+                for (int number = 1; number <= hall.SeatsPerRow; number++)
+                {
+                    seats.Add(new Seat
+                    {
+                        Row = row,
+                        Number = number,
+                        HallId = hall.Id
+                    });
+                }
+            }
+
+            _context.Seats.AddRange(seats);
+            await _context.SaveChangesAsync();
+
+            return Content($"Wygenerowano {seats.Count} miejsc dla sali {hall.Name}");
+        }
+
 
         private bool HallExists(int id)
         {

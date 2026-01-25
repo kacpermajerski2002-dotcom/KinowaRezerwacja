@@ -1,0 +1,32 @@
+﻿@model IEnumerable<KinowaRezerwacja.Models.Reservation>
+
+<h2>Moje rezerwacje</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Film</th>
+            <th>Data</th>
+            <th>Sala</th>
+            <th>Miejsce</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var r in Model)
+        {
+            <tr>
+                <td>@r.Seance.Movie.Title</td>
+                <td>@r.Seance.StartTime</td>
+                <td>@r.Seance.Hall.Name</td>
+                <td>R @r.Seat.Row / M @r.Seat.Number</td>
+                <td>
+                    <form asp-action="Cancel" method="post">
+                        <input type="hidden" name="id" value="@r.Id" />
+                        <button class="btn btn-danger btn-sm">Anuluj</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

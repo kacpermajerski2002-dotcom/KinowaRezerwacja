@@ -15,5 +15,8 @@ namespace KinowaRezerwacja.Models
 
         public int HallId { get; set; }
         public Hall? Hall { get; set; } = null!;
+
+        public ICollection<Reservation> Reservations { get; set; } = new List<Reservation>();
+
     }
 }

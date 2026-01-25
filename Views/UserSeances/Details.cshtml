@@ -1,0 +1,59 @@
+﻿@model KinowaRezerwacja.Models.Seance
+@using System.Security.Claims
+
+<h2>@Model.Movie?.Title</h2>
+
+<p>
+    <strong>Data:</strong> @Model.StartTime<br />
+    <strong>Sala:</strong> @Model.Hall?.Name
+</p>
+<p style="color:red;">
+    DEBUG: Seats count = @Model.Hall!.Seats.Count
+</p>
+
+
+<table class="table table-bordered text-center align-middle">
+    @foreach (var rowGroup in Model.Hall!.Seats
+        .GroupBy(s => s.Row)
+        .OrderBy(g => g.Key))
+    {
+        <tr>
+            <th>Rząd @rowGroup.Key</th>
+
+            @foreach (var seat in rowGroup.OrderBy(s => s.Number))
+            {
+                var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+                var myReservation = Model.Reservations
+                .FirstOrDefault(r => r.SeatId == seat.Id && r.UserId == userId);
+                var isReserved = Model.Reservations.Any(r => r.SeatId == seat.Id);
+
+                <td style="width:60px">
+                    @if (myReservation != null)
+                    {
+                        <span class="badge bg-primary">Twoje</span>
+                    }
+                    else if (isReserved)
+                    {
+                        <span class="badge bg-danger">Zajęte</span>
+                    }
+                    else
+                    {
+                        <form asp-controller="Reservations"
+                              asp-action="Create"
+                              method="post">
+                            <input type="hidden" name="seatId" value="@seat.Id" />
+                            <input type="hidden" name="seanceId" value="@Model.Id" />
+                            <button class="btn btn-success btn-sm">
+                                @seat.Number
+                            </button>
+                        </form>
+                    }
+                </td>
+
+            }
+        </tr>
+    }
+</table>
+
+
+

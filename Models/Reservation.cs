@@ -6,13 +6,17 @@ namespace KinowaRezerwacja.Models
     {
         public int Id { get; set; }
 
-        public int MovieId { get; set; }
-        public required Movie Movie { get; set; }
+        [Required]
+        public int SeanceId { get; set; }
+        public Seance Seance { get; set; } = null!;
 
+        [Required]
         public int SeatId { get; set; }
-        public required Seat Seat { get; set; }
+        public Seat Seat { get; set; } = null!;
 
-        public required string UserId { get; set; }
-        public DateTime ReservationDate { get; set; }
+        [Required]
+        public string UserId { get; set; } = null!;
+
+        public DateTime ReservationDate { get; set; } = DateTime.Now;
     }
 }
