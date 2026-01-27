@@ -1,8 +1,90 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Strona główna";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="container mt-5">
+
+    <!-- HERO -->
+    <div class="text-center mb-5">
+        <h1 class="display-4">🎬 KinowaRezerwacja</h1>
+        <p class="lead">
+            Wybierz seans, zarezerwuj miejsce i ciesz się filmem.
+        </p>
+    </div>
+
+    <!-- AKCJE GŁÓWNE -->
+    <div class="row text-center">
+
+        <!-- REPERTUAR -->
+        <div class="col-md-4 mb-4">
+            <h3>🎥 Repertuar</h3>
+            <p>
+                Sprawdź aktualne seanse i dostępne miejsca.
+            </p>
+            <a class="btn btn-primary"
+               asp-controller="UserSeances"
+               asp-action="Index">
+                Zobacz seanse
+            </a>
+        </div>
+
+        <!-- MOJE REZERWACJE (tylko zalogowany user) -->
+        @if (User.Identity?.IsAuthenticated == true && !User.IsInRole("Admin"))
+        {
+            <div class="col-md-4 mb-4">
+                <h3>🎟️ Moje rezerwacje</h3>
+                <p>
+                    Zobacz swoje aktywne rezerwacje.
+                </p>
+                <a class="btn btn-success"
+                   asp-controller="Reservations"
+                   asp-action="MyReservations">
+                    Moje rezerwacje
+                </a>
+            </div>
+        }
+
+        <!-- PANEL ADMINA -->
+        @if (User.IsInRole("Admin"))
+        {
+            <div class="col-md-4 mb-4">
+                <h3>⚙️ Panel administratora</h3>
+                <p>
+                    Zarządzaj salami, filmami i seansami.
+                </p>
+                <a class="btn btn-danger"
+                   asp-controller="Halls"
+                   asp-action="Index">
+                    Zarządzaj salami
+                </a>
+            </div>
+        }
+
+        <!-- CTA DLA GOŚCIA -->
+        @if (!User.Identity?.IsAuthenticated == true)
+        {
+            <div class="col-md-4 mb-4">
+                <h3>👤 Konto użytkownika</h3>
+                <p>
+                    Zaloguj się lub zarejestruj, aby rezerwować miejsca.
+                </p>
+                <a class="btn btn-outline-primary"
+                   asp-area="Identity"
+                   asp-page="/Account/Login">
+                    Zaloguj się
+                </a>
+            </div>
+        }
+
+    </div>
+
+    <hr class="my-5" />
+
+    <!-- INFO -->
+    <div class="text-center text-muted">
+        <p>
+            Projekt systemu rezerwacji kinowych – ASP.NET Core MVC + Entity Framework
+        </p>
+    </div>
+
 </div>

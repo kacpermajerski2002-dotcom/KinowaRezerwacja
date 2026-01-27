@@ -20,20 +20,36 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
+
+                        <!-- REPERTUAR – widoczny dla wszystkich -->
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            <a class="nav-link text-dark"
+                               asp-controller="UserSeances"
+                               asp-action="Index">
+                                Repertuar
+                            </a>
                         </li>
 
-                        @if (User.Identity!.IsAuthenticated)
+                        <!-- MOJE REZERWACJE – tylko zalogowany -->
+                        @if (User.Identity?.IsAuthenticated == true)
                         {
                             <li class="nav-item">
                                 <a class="nav-link text-dark"
                                    asp-controller="Reservations"
                                    asp-action="MyReservations">
                                     Moje rezerwacje
+                                </a>
+                            </li>
+                        }
+
+                        <!-- PANEL ADMINA – tylko Admin -->
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark"
+                                   asp-controller="Admin"
+                                   asp-action="Index">
+                                    Panel admina
                                 </a>
                             </li>
                         }

@@ -7,9 +7,15 @@
     <strong>Data:</strong> @Model.StartTime<br />
     <strong>Sala:</strong> @Model.Hall?.Name
 </p>
-<p style="color:red;">
+
+<!-- Sprawdzanie czy pobiera rekordy z bazy danych-->
+<!--
+
+    <p style="color:red;">
     DEBUG: Seats count = @Model.Hall!.Seats.Count
-</p>
+    </p>
+
+-->
 
 
 <table class="table table-bordered text-center align-middle">
@@ -56,4 +62,8 @@
 </table>
 
 
+<hr />
+<a asp-action="Index">
+    ← Powrót do repertuaru
+</a>
 
