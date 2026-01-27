@@ -1,31 +1,314 @@
-html {
-  font-size: 14px;
-}
-
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
-}
-
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
-}
-
-html {
-  position: relative;
-  min-height: 100%;
-}
+/* ===============================
+   GLOBAL
+================================ */
 
 body {
-  margin-bottom: 60px;
+    background-color: #2b2b2b;
+    color: #e0e0e0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {
-  color: var(--bs-secondary-color);
-  text-align: end;
+a {
+    color: #ff9800;
+    text-decoration: none;
+    transition: color 0.2s ease;
 }
 
-.form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
-  text-align: start;
+    a:hover {
+        color: #ffb74d;
+        text-decoration: underline;
+    }
+
+hr {
+    border-color: #444;
+}
+
+/* ===============================
+   NAVBAR
+================================ */
+
+.navbar {
+    background-color: #242424 !important;
+    border-bottom: 1px solid #3a3a3a;
+}
+
+.navbar-brand {
+    font-weight: bold;
+    letter-spacing: 1px;
+    color: #ff9800 !important;
+}
+
+.nav-link {
+    color: #e0e0e0 !important;
+    margin-right: 12px;
+}
+
+    .nav-link:hover {
+        color: #ffb74d !important;
+    }
+
+/* ===============================
+   HEADINGS
+================================ */
+
+h1, h2, h3, h4 {
+    color: #f0f0f0;
+}
+
+.lead {
+    color: #b5b5b5;
+}
+
+/* ===============================
+   TABLES
+================================ */
+
+.table {
+    background-color: #333333;
+    color: #e0e0e0;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+    .table thead {
+        background-color: #3d3d3d;
+    }
+
+    .table th {
+        color: #ffb74d;
+        text-transform: uppercase;
+        font-size: 0.85rem;
+        border-bottom: 1px solid #555;
+    }
+
+    .table td {
+        border-color: #4a4a4a;
+        vertical-align: middle;
+    }
+
+    .table tbody tr:hover {
+        background-color: #3a3a3a;
+    }
+
+/* ===============================
+   BUTTONS
+================================ */
+
+.btn {
+    border-radius: 8px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.btn-primary {
+    background-color: #ff9800;
+    border-color: #ff9800;
+    color: #222;
+}
+
+    .btn-primary:hover {
+        background-color: #e68900;
+        color: #111;
+    }
+
+.btn-success {
+    background-color: #2e7d32;
+    border-color: #2e7d32;
+}
+
+    .btn-success:hover {
+        background-color: #1b5e20;
+    }
+
+.btn-danger {
+    background-color: #8b2c2c;
+    border-color: #8b2c2c;
+}
+
+    .btn-danger:hover {
+        background-color: #6d1f1f;
+    }
+
+.btn-outline-primary {
+    color: #ff9800;
+    border-color: #ff9800;
+}
+
+    .btn-outline-primary:hover {
+        background-color: #ff9800;
+        color: #222;
+    }
+
+/* ===============================
+   CARDS / SECTIONS
+================================ */
+
+.container {
+    max-width: 1200px;
+}
+
+.card {
+    background-color: #333333;
+    border: 1px solid #4a4a4a;
+    border-radius: 14px;
+    box-shadow: 0 0 18px rgba(0,0,0,0.4);
+}
+
+.card-title {
+    color: #ffb74d;
+}
+
+/* ===============================
+   SEATS
+================================ */
+
+.seat {
+    width: 42px;
+    height: 42px;
+    border-radius: 8px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin: 6px;
+    font-size: 0.75rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.15s ease, background-color 0.2s ease;
+}
+
+.seat-free {
+    background-color: #2e7d32;
+    color: #e8f5e9;
+}
+
+    .seat-free:hover {
+        background-color: #43a047;
+        transform: scale(1.1);
+    }
+
+.seat-taken {
+    background-color: #8b2c2c;
+    color: #f5dada;
+    cursor: not-allowed;
+}
+
+/* ===============================
+   FORMS
+================================ */
+
+input, select {
+    background-color: #3a3a3a !important;
+    color: #e0e0e0 !important;
+    border: 1px solid #555 !important;
+    border-radius: 6px;
+}
+
+    input:focus, select:focus {
+        border-color: #ff9800 !important;
+        box-shadow: 0 0 0 2px rgba(255, 152, 0, 0.3) !important;
+    }
+
+/* ===============================
+   FOOTER
+================================ */
+
+footer {
+    background-color: #242424;
+    color: #b5b5b5;
+    border-top: 1px solid #3a3a3a;
+}
+/* ===============================
+   REPERTUAR / LISTY
+================================ */
+
+/* list-group (repertuar, rezerwacje) */
+.list-group {
+    background-color: transparent;
+}
+
+.list-group-item {
+    background-color: #333333 !important;
+    color: #e0e0e0;
+    border: 1px solid #444;
+    margin-bottom: 6px;
+    border-radius: 10px;
+    transition: background-color 0.2s ease;
+}
+
+    .list-group-item:hover {
+        background-color: #3a3a3a;
+    }
+
+    /* aktywna pozycja */
+    .list-group-item.active {
+        background-color: #ff9800 !important;
+        border-color: #ff9800;
+        color: #222;
+        font-weight: bold;
+    }
+
+/* ===============================
+   REPERTUAR – SEANSY
+================================ */
+
+.repertoire-item {
+    background-color: #333333;
+    border: 1px solid #444;
+    border-radius: 14px;
+    padding: 16px;
+    margin-bottom: 18px;
+    box-shadow: 0 0 14px rgba(0,0,0,0.35);
+}
+
+    .repertoire-item h5 {
+        color: #ffb74d;
+    }
+
+.repertoire-meta {
+    color: #b5b5b5;
+    font-size: 0.9rem;
+}
+
+/* ===============================
+   USUÑ BIA£E T£A BOOTSTRAPA
+================================ */
+
+.bg-white,
+.bg-light {
+    background-color: #2b2b2b !important;
+}
+
+/* ===============================
+   TABLE FIX (na 100%)
+================================ */
+
+.table {
+    background-color: #444444 !important;
+}
+
+    .table td,
+    .table th {
+        background-color: transparent !important;
+    }
+
+/* ===============================
+   ALERTS
+================================ */
+
+.alert {
+    background-color: #333333;
+    border-color: #444;
+    color: #e0e0e0;
+}
+
+.alert-success {
+    border-left: 5px solid #2e7d32;
+}
+
+.alert-warning {
+    border-left: 5px solid #ff9800;
+}
+
+.alert-danger {
+    border-left: 5px solid #8b2c2c;
 }
